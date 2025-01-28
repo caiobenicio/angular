@@ -25,25 +25,23 @@ export class LoginComponent {
 
 
   login(user: string, senha: string){
-    this.authService.login(user, senha).subscribe({
-      next: (data) => {
-        localStorage.setItem('token', data.access_token);
-        this.router.navigate(['/home']);
-      },
-      error: (error) => {
-        this.router.navigate(['/']);
-        this.mensagemErro("erro")
-      }
-    });
+    const auth = this.authService.login(user, senha);
+
+    if (auth) {
+      this.router.navigate(['/home']);
+    } else {
+      this.router.navigate(['/']);
+      this.mensagemErro("erro");
+    }
    }
 
   closeErro(classe: string):void{
     const alerta = this.remover.nativeElement.querySelector("#alerta");
     alerta.classList.add(classe)
-  }  
+  }
 
   mensagemErro(classe: string):void{
     const alerta = this.remover.nativeElement.querySelector("#alerta");
     alerta.classList.remove(classe)
-  }  
+  }
 }

@@ -5,19 +5,18 @@ import { catchError, map, of } from 'rxjs';
 
 export namespace AuthGuard {
   export const canActivate = (
-      route: ActivatedRouteSnapshot, 
+      route: ActivatedRouteSnapshot,
       state: RouterStateSnapshot
   ) => {
       const authService = inject(AuthService);
       const router = inject(Router);
 
-      return authService.isLoggedIn().pipe(
-              map(() => true),
-              catchError(() => {
-                  return of(router.createUrlTree(['/login']));
-              }
-          )
-      );
+      if (!authService.isLoggedIn()) {
+        router.navigate(['/login']);
+        return false;
+      }
+
+      return true;
   }
 
   export const canActivateChild = (

@@ -16,19 +16,32 @@ export class AuthService {
     this.accessToken = localStorage.getItem('token');
   }
 
-  login(user: string, senha:string):Observable<any>{
+  sendLogin(user: string, senha:string):Observable<any>{
     return this.httpClient.post<any>(this.apiUrl+`api/oauth2/v1/token?grant_type=password&username=${user}&password=${senha}`, {})
  }
 
-  isLoggedIn():any {
+  isLoggedIn():boolean {
     if (this.accessToken == null) {
-      return null;
+      return false;
     }
-    return this.accessToken;
+    return !!this.accessToken;
   }
 
   logout() {
     localStorage.clear();
     this.router.navigate(['/login']);
-  }  
+  }
+
+  login(user: string, senha: string):boolean {
+    this.sendLogin(user, senha).subscribe({
+      next: (data) => {
+        localStorage.setItem('token', data.access_token);
+      },
+      error: (error) => {
+        localStorage.clear();
+        return false;
+      }
+    });
+    return this.isLoggedIn();
+  }
 }

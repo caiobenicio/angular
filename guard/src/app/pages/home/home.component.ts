@@ -15,7 +15,7 @@ export class HomeComponent {
   constructor(private sessionservice: SessionService) { }
 
   ngOnInit(): void {
-    this.getSessionList();
+   // this.getSessionList();
   }
 
   getSessionList(): void {
