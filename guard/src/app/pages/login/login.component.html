@@ -1,0 +1,21 @@
+<div class="container">
+    <form action="" class="cont-form">
+        <div class="title">
+            <h2>Conta Tudo</h2>
+            <h4>Boas-vindas</h4>
+        </div>
+
+        <input type="text" class="cf-input cfi-user" placeholder="usuário" [(ngModel)]="user" name="user" required>
+        <input type="password" class="cf-input cfi-pass" placeholder="senha" [(ngModel)]="senha" name="senha" required>
+        <button class="cf-button" (click)="login(user, senha)">Login</button>
+        <a href="">Esqueceu a senha?</a>
+    </form>
+    <!-- alerta de erro -->
+    <div class="alerta erro" id="alerta">
+        <div class="img_error">
+            <img src="" alt="">
+        </div>
+        <h3>E-mail ou senha inválido</h3>
+        <button class="fechar" (click)="closeErro('erro')">x</button>
+    </div>
+</div>
