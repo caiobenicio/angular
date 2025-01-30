@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ProAppConfigService } from '@totvs/protheus-lib-core';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +11,17 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'guard';
+  protheus: boolean;
+
+  constructor(
+    private proAppConfigService: ProAppConfigService,
+  ) {
+    if (this.proAppConfigService.insideProtheus()) {
+      this.protheus = true;
+      localStorage.setItem('token', "tokem");
+    }
+    else {
+      this.protheus = false;
+    }
+  }
 }
