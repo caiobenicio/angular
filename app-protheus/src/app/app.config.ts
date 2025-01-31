@@ -1,4 +1,4 @@
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ProtheusLibCoreModule } from '@totvs/protheus-lib-core';
@@ -6,7 +6,7 @@ import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } fr
 
 export const appConfig: ApplicationConfig = {   
   providers: [
-    provideRouter(routes),
+    provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(),
     importProvidersFrom([ProtheusLibCoreModule]),
     provideZoneChangeDetection({ eventCoalescing: true }),
