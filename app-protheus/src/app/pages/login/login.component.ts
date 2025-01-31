@@ -14,18 +14,21 @@ import { AuthService } from '../../service/auth.service';
 export class LoginComponent {
   user: string = "";
   senha: string = "";
-
+  
   constructor(private authService: AuthService, private router: Router, private remover: ElementRef) { }
 
   login(user: string, senha: string) {
-    const auth = this.authService.login(user, senha);
-
-    if (auth) {
-      this.router.navigate(['/session']);
-    } else {
-      this.router.navigate(['/login']);
-      this.mensagemErro("erro");
-    }
+    this.authService.login(user, senha).subscribe({
+      next: (data) => {
+        localStorage.setItem('access_token', data.access_token);
+        this.router.navigate(['/session']);
+      },
+      error: (error) => {
+        this.router.navigate(['/login']);
+        this.mensagemErro("erro");
+        return false;
+      }
+    });
   }
 
   closeErro(classe: string): void {

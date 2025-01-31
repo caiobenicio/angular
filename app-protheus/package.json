@@ -18,8 +18,6 @@
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
-    "@po-ui/ng-components": "^18.24.0",
-    "@po-ui/ng-templates": "^18.24.0",
     "@totvs/protheus-lib-core": "^17.3.4",
     "@totvs/twebchannel-js": "^1.0.3",
     "rxjs": "~7.8.0",

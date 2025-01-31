@@ -29,22 +29,7 @@ export class AuthService {
     return !!this.accessToken;
   }
 
-  login(user: string, senha: string): boolean {
-    let valid = false;
-    this.sendLogin(user, senha).subscribe({
-      next: (data) => {
-        localStorage.setItem('access_token', data.access_token);
-        valid = true;
-      },
-      error: (error) => {
-        localStorage.clear();
-        return false;
-      }
-    });
-    return valid;
-  }
-
-  sendLogin(user: string, senha: string): Observable<any> {
+  login(user: string, senha: string): Observable<any> {
     return this.httpClient.post<any>(this.apiUrl + `api/oauth2/v1/token?grant_type=password&username=${user}&password=${senha}`, {})
   }
 }

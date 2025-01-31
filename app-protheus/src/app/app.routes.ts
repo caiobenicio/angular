@@ -11,10 +11,3 @@ export const routes: Routes = [
     //{ path: 'count',   component: CountComponent,   canActivate: [AuthGuard] },
     //{ path: '**',      component: SessionComponent, canActivate: [AuthGuard] },
 ];
-
-
-
-// { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard.canActivate]},
-// { path: 'login', component: LoginComponent },
-// { path: 'home', component: HomeComponent, canActivate: [AuthGuard.canActivate] },
-// { path: '**', component: LoginComponent },
