@@ -1,12 +1,18 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
-import { authGuard } from './guard/auth.guard';
+import { SessionComponent } from './pages/session/session.component';
+import { ProductComponent } from './pages/product/product.component';
+import { CountComponent } from './pages/count/count.component';
+import { AuthGuard } from './guard/auth.guard';
 
 export const routes: Routes = [
-    { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [authGuard] },
     { path: 'login', component: LoginComponent },
-    { path: 'home', component: HomeComponent, canActivate: [authGuard] },
-    { path: '**', component: HomeComponent, canActivate: [authGuard] },
+    { path: '', component: SessionComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+    { path: '**', component: SessionComponent, canActivate: [AuthGuard] },
+    { path: 'session', component: SessionComponent, canActivateChild: [AuthGuard], children: [
+        { path: 'product', component: ProductComponent },
+        { path: 'count', component: CountComponent }
+    ]
+    },
 ];
 

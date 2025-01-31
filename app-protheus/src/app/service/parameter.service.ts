@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { PoNotificationService } from '@po-ui/ng-components';
 import { ProJsToAdvplService } from '@totvs/protheus-lib-core';
 import { Observable } from 'rxjs';
 
@@ -8,12 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class ParameterService {
 
-  constructor(private proJsToAdvplService: ProJsToAdvplService,
-    private poNotification: PoNotificationService
+  constructor(private proJsToAdvplService: ProJsToAdvplService
   ) { }
 
   getParam(param: string): void {
-    this.proJsToAdvplService.jsToAdvpl('setParam', param);
+    this.proJsToAdvplService.jsToAdvpl('getParam', param);
   }
 
   setParameter(param: string): Observable<string> {

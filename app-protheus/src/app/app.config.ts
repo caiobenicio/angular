@@ -1,5 +1,4 @@
 import { provideRouter } from '@angular/router';
-
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ProtheusLibCoreModule } from '@totvs/protheus-lib-core';

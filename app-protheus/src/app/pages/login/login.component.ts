@@ -17,17 +17,13 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router, private remover: ElementRef) { }
 
-  click() {
-    this.router.navigate(['/home']);
-  }
-
   login(user: string, senha: string) {
     const auth = this.authService.login(user, senha);
 
     if (auth) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/session']);
     } else {
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
       this.mensagemErro("erro");
     }
   }
