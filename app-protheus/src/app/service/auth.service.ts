@@ -8,14 +8,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  accessToken;
-  apiUrl;
+  private accessToken: string | null;
+  private serverUrl: string;
+  private apiOauth2 = 'api/oauth2/v1/token?grant_type=password&username=';
 
   constructor(
     private httpClient: HttpClient,
     private protheusService: ProtheusService) {
 
-    this.apiUrl = environment.apiUrl;
+    this.serverUrl = environment.serverUrl;
     this.accessToken = localStorage.getItem('access_token');
   }
 
@@ -30,6 +31,6 @@ export class AuthService {
   }
 
   login(user: string, senha: string): Observable<any> {
-    return this.httpClient.post<any>(this.apiUrl + `api/oauth2/v1/token?grant_type=password&username=${user}&password=${senha}`, {})
+    return this.httpClient.post<any>(this.serverUrl + this.apiOauth2 + `${user}&password=${senha}`, {})
   }
 }

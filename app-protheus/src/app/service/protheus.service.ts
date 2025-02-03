@@ -8,29 +8,31 @@ import { SessionModel } from '../interface/session';
   providedIn: 'root'
 })
 export class ProtheusService {
-  private url = "http://187.72.90.194:8992/rest";
+  private serverUrl: string | undefined;
   private readonly api: string = '/estoque/secoesBalanco';
 
-  appConfig: ProAppConfig = {};
-  serverWithApiUrl;  
+  private appConfig: ProAppConfig = {};
+  private serverWithApiUrl;
 
-  constructor(private proAppConfigService: ProAppConfigService, private httpClient: HttpClient) { 
-    this.url += this.api;
+  constructor(
+    private proAppConfigService: ProAppConfigService, 
+    private httpClient: HttpClient
+  ) {
 
-    if (this.proAppConfigService.insideProtheus()) { 
+    if (this.proAppConfigService.insideProtheus()) {
       this.proAppConfigService.loadAppConfig();
       this.appConfig = this.proAppConfigService.proAppConfig;
-      this.serverWithApiUrl = this.proAppConfigService.serverWithApiUrl;
-
-      this.url = this.serverWithApiUrl + this.api;
-    }        
+      this.serverWithApiUrl = this.proAppConfigService.serverWithApiUrl;  
+      
+      this.serverUrl = this.serverWithApiUrl + this.api;
+    }
   }
 
-  isProtheus():boolean {
+  isProtheus(): boolean {
     return this.proAppConfigService.insideProtheus();
-  } 
-     
+  }
+
   getBySession(filial: string): Observable<SessionModel[]> {
-    return this.httpClient.get<SessionModel[]>(`${this.url}/${filial}`);
-  }   
+    return this.httpClient.get<SessionModel[]>(`${this.serverUrl}/${filial}`);
+  }
 }
